@@ -25,10 +25,38 @@ class App(tk.Tk):
 
         self.title('FacilitaIR')
         self.configure(background=Colors.c0_powder_blue)
+        
+        # Stocks Tree View
+        columns = ('ticker', 'cnpj', 'year_price')
+        tree = ttk.Treeview(self, columns=columns, show='headings')
 
+        tree.heading('ticker', text='Ticker')
+        tree.heading('cnpj', text='CNPJ')
+        tree.heading('year_price', text='Fechamento')
+
+        stocks = []
+
+        for n in range(1,10):
+            stocks.append((f'ABC3 {n}', f'00.100.000/0001-0{n}', f'R${n}'))
+
+        for stock in stocks:
+            tree.insert('', tk.END, values=stock)
+
+        tree.bind('<<TreeviewSelect>>', item_selected(tree, tree.event_info()))
+        tree.grid(row=0, column=0,sticky='nsew')
+        tree.pack()
+
+        # Quit Button
         button_quit = Button(self, command=quit, text="Fechar", width=8)
-        button_quit.place(x=300, y=500)
+        button_quit.pack()
 
+    
+
+def item_selected(tree: ttk.Treeview, event):
+        for selected_item in tree.selection():
+            item = tree.item(selected_item)
+            record = item['values']
+            messagebox.showinfo(title='Info', message='testing'.join(record))
 
 if __name__ == '__main__':
     app = App()
