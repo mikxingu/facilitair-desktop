@@ -1,4 +1,4 @@
-from views import Colors
+from utils import Colors
 
 import tkinter as tk
 from tkinter import Button, ttk
