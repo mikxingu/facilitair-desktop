@@ -26,6 +26,8 @@ class App(tk.Tk):
         self.title('FacilitaIR')
         self.configure(background=Colors.c0_powder_blue)
         
+        messagebox.showinfo('Disclaimer', 'Essa aplicação utiliza como fonte dados disponíveis na internet. Conferir os dados é sempre importante!')
+
         # Stocks Tree View
         columns = ('ticker', 'cnpj', 'year_price')
         tree = ttk.Treeview(self, columns=columns, show='headings')
